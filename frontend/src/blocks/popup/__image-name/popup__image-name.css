@@ -1,0 +1,14 @@
+.popup__image-name {
+  max-width: 291px;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  margin: 10px 0 0 0;
+  color: #fff;
+}
+
+@media screen and (max-width: 590px) {
+  .popup__image-name {
+    max-width: 240px;
+  }
+}

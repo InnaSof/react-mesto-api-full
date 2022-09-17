@@ -1,0 +1,6 @@
+.element__card {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+  margin: 25px 30px 30px 21px;
+}
