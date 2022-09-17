@@ -1,0 +1,10 @@
+.profile__avatar-wrapper {
+  position: relative;
+  margin-top: 37px;
+}
+
+@media screen and (max-width: 590px) {
+  .profile__avatar-wrapper {
+    margin: 38px auto 0 auto;
+  }
+}

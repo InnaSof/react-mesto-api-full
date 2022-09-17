@@ -1,0 +1,12 @@
+.auth__login {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  transition: opacity .3s;
+  text-decoration: none;
+}
+
+.auth__login:hover {
+  opacity: 0.6;
+}
