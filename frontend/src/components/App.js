@@ -26,13 +26,15 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   const [requestStatus, setRequestStatus] = useState({
     status: false,
     title: '',
   });
+
+  let state = !!localStorage.getItem('token');
+  const [loggedIn, setLoggedIn] = useState(state);
 
   const history = useHistory();
 
@@ -64,7 +66,7 @@ function App() {
     if (token) {
       auth.checkToken(token)
         .then((res) => {
-          setEmail(res.data.email)
+          setEmail(res.email)
           setLoggedIn(true);
           history.push('/');
         })
@@ -182,7 +184,7 @@ function handleSignOut() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (!isLiked) {
       api.addLike(card._id)
