@@ -6,6 +6,7 @@ const { errors } = require('celebrate');
 const handleError = require('./middlewares/handleError');
 const router = require('./routes/index');
 const cors = require('./middlewares/cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line global-require
@@ -26,8 +27,10 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use(cors);
 
+app.use(requestLogger);
 app.use(router);
 
+app.use(errorLogger);
 app.use(errors()); // ошибки celebrate
 app.use(handleError); // центральная обработка ошибок
 
