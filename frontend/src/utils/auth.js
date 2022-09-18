@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'http://api.mesto.practicum.nomoredomains.sbs/';
 
 function onResponse(res) {
   if (res.ok) {
