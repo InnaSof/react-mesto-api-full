@@ -1,9 +1,14 @@
+function _getHeaders(){
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  }
+}
+
 class Api {
   constructor(options) {
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
+    this._baseUrl = options.baseUrl
   }
-
   _handleResponse(res) {
     if (res.ok) {
       return res.json();
@@ -14,7 +19,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers,
+      headers: _getHeaders(),
     })
     .then(this._handleResponse);
   }
@@ -22,7 +27,7 @@ class Api {
   getProfileInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers,
+      headers: _getHeaders(),
     })
     .then(this._handleResponse);
   }
@@ -30,7 +35,7 @@ class Api {
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: _getHeaders(),
       body: JSON.stringify({
         name: name,
         about: about
@@ -42,7 +47,7 @@ class Api {
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: _getHeaders(),
       body: JSON.stringify({
         name: name,
         link: link
@@ -54,7 +59,7 @@ class Api {
   editAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: _getHeaders(),
       body: JSON.stringify({
         avatar: avatar
       })
@@ -65,7 +70,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: _getHeaders(),
     })
     .then(this._handleResponse);
   }
@@ -73,7 +78,7 @@ class Api {
   addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
-      headers: this._headers,
+      headers: _getHeaders(),
     })
     .then(this._handleResponse);
   }
@@ -81,18 +86,14 @@ class Api {
   removeLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: _getHeaders(),
     })
     .then(this._handleResponse);
   }
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',
-  headers: {
-    authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzI1N2Y3ZWQxMmI0OGE5NTUzNDRlNDciLCJpYXQiOjE2NjM0MDE4ODksImV4cCI6MTY2NDAwNjY4OX0.Tw5mQYLxYXQ97G3WaBhjLj-9voKJZwBhAf5-MnjyuwI',
-    'Content-Type': 'application/json'
-  }
+  baseUrl: 'http://localhost:3001'
 });
 
 export default api;
