@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -6,14 +7,19 @@ const handleError = require('./middlewares/handleError');
 const router = require('./routes/index');
 const cors = require('./middlewares/cors');
 
-const { PORT = 3001 } = process.env;
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line global-require
+  require('dotenv').config({
+    path: '.env.default',
+  });
+}
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: false,
 });
@@ -25,4 +31,4 @@ app.use(router);
 app.use(errors()); // ошибки celebrate
 app.use(handleError); // центральная обработка ошибок
 
-app.listen(PORT);
+app.listen(process.env.PORT);
