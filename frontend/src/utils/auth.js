@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.mesto.practicum.nomoredomains.sbs/';
+const BASE_URL = 'https://api.mesto.practicum.nomoredomains.sbs';
 
 function onResponse(res) {
   if (res.ok) {
