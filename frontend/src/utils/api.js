@@ -93,7 +93,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://api.mesto.practicum.nomoredomains.sbs/'
+  baseUrl: 'https://api.mesto.practicum.nomoredomains.sbs/'
 });
 
 export default api;
